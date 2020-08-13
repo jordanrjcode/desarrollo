@@ -1,0 +1,30 @@
+.portafolio {
+  padding: 25px 0;
+  min-height: 95vh;
+}
+.portafolio__titulo {
+  margin-bottom: 25px;
+  text-align: center;
+}
+.contenedor__portafolio {
+  margin: 0 auto;
+  width: 75%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 300px;
+  grid-gap: 25px;
+}
+@media (max-width: 767px) {
+  .contenedor__portafolio {
+    grid-template-columns: 1fr;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 768px) and (max-width: 1200px) {
+  .contenedor__portafolio {
+    grid-template-columns: repeat(2, 1fr);
+    width: 80%;
+    margin: 0 auto;
+  }
+}

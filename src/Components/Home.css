@@ -1,0 +1,40 @@
+.home {
+  min-height: calc(100vh - 5vh);
+  width: 75%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.home__contenedor {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+.home__contenedor__foto {
+  width: 100%;
+}
+.home__titulo {
+  text-align: center;
+  margin: 18px;
+  color: #f5f5f5;
+}
+.home__description {
+  text-align: justify;
+  color: #f5f5f5;
+}
+.home__button {
+  border-radius: 8px;
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+  margin: 15px auto;
+  width: fit-content;
+  text-align: center;
+  transition: ease-in-out 0.2s;
+}
+.home__button:hover {
+  background-color: rgba(112, 160, 182, 0.205);
+}

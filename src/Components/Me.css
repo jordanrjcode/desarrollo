@@ -1,0 +1,17 @@
+.contenedor__me {
+  min-height: calc(100vh - 5vh);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.me__title,
+.me__subtitle {
+  text-align: center;
+  margin: 15px 0;
+}
+.me__sub {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin: 25px 0;
+}
