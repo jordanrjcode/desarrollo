@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Navbar.css";
 import { Modo } from "../Context/modo/modoContext";
+import UserContext from "../Context/user/usersContext";
 import { NavLink, Link } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import TwitterIcon from "@material-ui/icons/Twitter";
@@ -9,9 +10,11 @@ import BallotIcon from "@material-ui/icons/Ballot";
 import SearchIcon from "@material-ui/icons/Search";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 const Navbar = () => {
   const [dark, setDark] = React.useState(true);
   const themeMode = dark === true ? <Brightness7Icon /> : <Brightness4Icon />;
+  const { user, cerrarSesion } = useContext(UserContext);
   const { theme, isdark, setIsDark } = React.useContext(Modo);
   return (
     <nav className="navbar" style={{ background: theme.background }}>
@@ -76,6 +79,15 @@ const Navbar = () => {
         >
           <LinkedInIcon />
         </a>
+        <button
+          style={{ color: theme.fuente2 }}
+          onClick={() => {
+            cerrarSesion();
+          }}
+          className="navbar__links__items"
+        >
+          <ExitToAppIcon />
+        </button>
       </div>
     </nav>
   );

@@ -30,6 +30,7 @@ const ModoContext = (props) => {
       isdark === true ? setTheme(tema1) : setTheme(tema2);
     };
     verificarTema();
+    // eslint-disable-next-line
   }, [isdark]);
   return (
     <Modo.Provider value={{ theme, isdark, setIsDark }}>

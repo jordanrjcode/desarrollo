@@ -1,0 +1,13 @@
+.admin__contenedor {
+  width: 80%;
+  margin: 0 auto;
+}
+.admin__input {
+  display: block;
+  width: 50%;
+  margin: 15px auto;
+}
+.admin__button {
+  width: fit-content;
+  padding: 10px;
+}

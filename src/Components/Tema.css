@@ -2,17 +2,25 @@
   border-radius: 8px;
   width: 300px;
   margin: 0 auto;
+  box-sizing: border-box;
+  padding-bottom: 5px;
 }
 .contenedor__imagen {
   width: 100%;
+  height: 70%;
   border-radius: 5px;
   overflow: hidden;
 }
 .imagen__tema {
   max-width: 100%;
+  min-height: 100%;
   object-fit: contain;
+  display: block;
+  margin: auto auto;
 }
 .tema__titulo {
+  font-size: 1em;
+  text-transform: uppercase;
   text-align: center;
   padding: 10px;
 }
