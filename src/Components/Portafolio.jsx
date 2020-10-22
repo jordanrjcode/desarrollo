@@ -21,9 +21,9 @@ const Portafolio = () => {
       <div className="contenedor__portafolio">
         {temas[0].TodosLosTemas1.map((tema) => (
           <Tema
-            titulo={tema.titleTema}
-            descripcion={tema.descripcionTema}
             imagen={tema.imagen}
+            titulo={tema.titleTema}
+            cuerpo={tema.cuerpoTema}
             key={tema.titleTema}
           />
         ))}
@@ -38,7 +38,7 @@ const Portafolio = () => {
         {temas[0].TodosLosTemas2.map((tema) => (
           <Tema
             imagen={tema.imagen}
-            descripcion={tema.descripcionTema}
+            cuerpo={tema.cuerpoTema}
             titulo={tema.titleTema}
             key={tema.titleTema}
           />

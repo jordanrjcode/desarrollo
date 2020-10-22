@@ -79,15 +79,17 @@ const Navbar = () => {
         >
           <LinkedInIcon />
         </a>
-        <button
-          style={{ color: theme.fuente2 }}
-          onClick={() => {
-            cerrarSesion();
-          }}
-          className="navbar__links__items"
-        >
-          <ExitToAppIcon />
-        </button>
+        {user ? (
+          <button
+            style={{ color: theme.fuente2 }}
+            onClick={() => {
+              cerrarSesion();
+            }}
+            className="navbar__links__items"
+          >
+            <ExitToAppIcon />
+          </button>
+        ) : null}
       </div>
     </nav>
   );

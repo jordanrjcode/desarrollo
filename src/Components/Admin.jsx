@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "./Admin.css";
 import temaContext from "../Context/temas/temaContext";
+import { Editor } from "@tinymce/tinymce-react";
 const Admin = () => {
   const {
     temas,
@@ -16,36 +17,30 @@ const Admin = () => {
   const [data, setData] = React.useState({
     documento: "",
     titulo: "",
-    descripcion: "",
+    cuerpo: "",
     unidad: "",
-    resumen: "",
+    imagenURL: "",
   });
-  const { documento, titulo, descripcion, unidad, resumen } = data;
+  const { documento, titulo, cuerpo, unidad, imagenURL } = data;
   const [imagenPortada, setImagenPortada] = React.useState("");
 
   if (temas.length === 0) return null;
   const obtenerData = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
-
   const seleccionarArchivo = (e) => {
     console.log(e.target.files[0]);
     const imagen = e.target.files[0];
-
     if (imagen === undefined) {
-      console.log("sin imagen");
       return;
     }
-
     if (imagen.type === "image/jpeg" || imagen.type === "image/png") {
       console.log("enviando");
       subirImagen(imagenPortada, imagen);
     } else {
-      console.log("archivo no válido");
       return;
     }
   };
-
   const enviar = (e) => {
     e.preventDefault();
     if (!documento.trim()) {
@@ -56,7 +51,7 @@ const Admin = () => {
       alert("Error");
       return;
     }
-    if (!descripcion.trim()) {
+    if (!cuerpo.trim()) {
       alert("Error");
       return;
     }
@@ -64,21 +59,47 @@ const Admin = () => {
       alert("Error");
       return;
     }
-    if (!resumen.trim()) {
+    if (!imagenURL.trim()) {
       alert("Error");
       return;
     }
-    agregarTema(unidad, documento, titulo, resumen, descripcion);
-    console.log("agregado");
+    agregarTema(unidad, documento, titulo, cuerpo, imagenURL);
+    setData({
+      documento: "",
+      titulo: "",
+      cuerpo: "",
+      unidad: "",
+      imagenURL: "",
+    });
+  };
+  const handleEditorChange = (content) => {
+    setData({ ...data, cuerpo: content });
   };
   return (
     <div>
       <form onSubmit={enviar} className="admin__contenedor">
+        <input
+          type="text"
+          className="admin__input"
+          onChange={(e) => {
+            setImagenPortada(e.target.value);
+          }}
+          placeholder="Nombre de imagen"
+        />
+        <input
+          type="file"
+          name="imagen"
+          className="admin__input"
+          onChange={(e) => seleccionarArchivo(e)}
+        />
+        {urlImagen !== null ? <p>{urlImagen}</p> : null}
+        <hr />
         <select
           className="admin__input"
           onChange={(e) => {
             obtenerData(e);
           }}
+          defaultValue=""
           name="unidad"
         >
           <option value="">--Seleccione la unidad--</option>
@@ -90,11 +111,13 @@ const Admin = () => {
           onChange={(e) => {
             obtenerData(e);
           }}
+          value={documento}
           type="text"
           placeholder="Ingrese el nombre del documento"
           name="documento"
         />
         <input
+          value={titulo}
           className="admin__input"
           onChange={(e) => {
             obtenerData(e);
@@ -103,58 +126,45 @@ const Admin = () => {
           placeholder="Ingrese el titulo del tema"
           name="titulo"
         />
-        <textarea
+        <input
           className="admin__input"
-          placeholder="Ingrese un breve resumen del tema"
           onChange={(e) => {
             obtenerData(e);
           }}
-          name="resumen"
-          cols="15"
-          rows="10"
-        ></textarea>
-        <textarea
-          className="admin__input"
-          defaultValue=""
-          onChange={(e) => {
-            obtenerData(e);
-          }}
-          name="descripcion"
-          cols="15"
-          rows="10"
-          placeholder="Ingrese la descripcion del tema"
-        ></textarea>
+          type="text"
+          placeholder="Imagen URL"
+          name="imagenURL"
+          value={imagenURL}
+        />
+        <div className="editor">
+          <Editor
+            apiKey="i8dn2l2jy07k41vjxwp809ymfvj7idp4nb1gp8bt5trr8caq"
+            init={{
+              height: 500,
+              menu: {
+                happy: { title: "Happy", items: "code" },
+              },
+              plugins: [
+                "media",
+                "code",
+                "advlist autolink lists link image",
+                "charmap print preview anchor help",
+                "searchreplace visualblocks code",
+                "insertdatetime media table paste wordcount",
+              ],
+              toolbar:
+                "undo redo | formatselect | bold italic | \
+            alignleft aligncenter alignright | \
+            bullist numlist outdent indent | help",
+              menubar: "happy, insert",
+            }}
+            onEditorChange={handleEditorChange}
+          />
+        </div>
         <button className="admin__input admin__button" type="submit">
           Enviar Tema
         </button>
-        <select
-          name="imagenPortada"
-          onChange={(e) => {
-            setImagenPortada(e.target.value);
-          }}
-          className="admin__input"
-        >
-          <option value="">--Unidad 1--</option>
-          {temas[0].TodosLosTemas1.map((tema) => (
-            <option key={tema.titleTema} value={tema.titleTema}>
-              {tema.titleTema}
-            </option>
-          ))}
-          <option value="">--Unidad 2--</option>
-          {temas[0].TodosLosTemas2.map((tema) => (
-            <option key={tema.titleTema} value={tema.titleTema}>
-              {tema.titleTema}
-            </option>
-          ))}
-        </select>
-        <input
-          type="file"
-          name="imagen"
-          className="admin__input"
-          onChange={(e) => seleccionarArchivo(e)}
-        />
       </form>
-      {urlImagen !== null ? <p>{urlImagen}</p> : null}
     </div>
   );
 };

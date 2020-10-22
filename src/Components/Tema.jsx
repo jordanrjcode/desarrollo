@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Tema = ({ titulo, imagen, descripcion }) => {
+const Tema = ({ titulo, cuerpo, imagen }) => {
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
 
@@ -66,17 +66,11 @@ const Tema = ({ titulo, imagen, descripcion }) => {
         open={open}
         onClose={handleClose}
       >
-        <div style={modalStyle} className={classes.paper}>
-          <h2 id="simple-modal-title" style={{ textAlign: "center" }}>
-            {titulo}
-          </h2>
-          <div className="contenedor__imagen">
-            <img className="imagen__tema" src={imagen} alt="imagen tema" />
-          </div>
-          <p id="simple-modal-description" style={{ textAlign: "justify" }}>
-            {descripcion}
-          </p>
-        </div>
+        <div
+          style={modalStyle}
+          className={classes.paper}
+          dangerouslySetInnerHTML={{ __html: cuerpo }}
+        ></div>
       </Modal>
     </div>
   );

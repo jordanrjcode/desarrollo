@@ -16,8 +16,8 @@ const TemaState = (props) => {
   const obtenerTemas = async () => {
     try {
       const [unidad1, unidad2] = await Promise.all([
-        db.collection("unidad1").orderBy("order").get(),
-        db.collection("unidad2").orderBy("order").get(),
+        db.collection("unidad1").get(),
+        db.collection("unidad2").get(),
       ]);
       const TodosLosTemas1 = [];
       const TodosLosTemas2 = [];
@@ -40,16 +40,6 @@ const TemaState = (props) => {
     }
   };
 
-  //Iniciar sesion
-  const iniciarSesion = async (email, password) => {
-    try {
-      const res = await auth.signInWithEmailAndPassword(email, password);
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const subirImagen = async (documento, imagen) => {
     try {
       const refImagen = storage.ref().child(documento).child("foto portada");
@@ -67,17 +57,11 @@ const TemaState = (props) => {
   };
 
   //Agregar un tema
-  const agregarTema = async (
-    collec,
-    documentooo,
-    title,
-    resumen,
-    descripcion
-  ) => {
+  const agregarTema = async (collec, documentooo, title, cuerpo, imagen) => {
     const tema = {
       titleTema: title,
-      resumenTema: resumen,
-      descripcionTema: descripcion,
+      cuerpoTema: cuerpo,
+      imagen: imagen,
     };
     try {
       await db.collection(collec).doc(documentooo).set(tema);
@@ -94,7 +78,6 @@ const TemaState = (props) => {
         temas: state.temas,
         urlImagen: state.urlImagen,
         obtenerTemas,
-        iniciarSesion,
         agregarTema,
         subirImagen,
       }}

@@ -1,11 +1,16 @@
-import React from "react";
-import temaContext from "../Context/temas/temaContext";
-const Login = () => {
-  const { iniciarSesion } = React.useContext(temaContext);
+import React, { useEffect } from "react";
+import UserContext from "../Context/user/usersContext";
+const Login = (props) => {
+  const { user, autenticado, iniciarSesion } = React.useContext(UserContext);
   const [datos, setDatos] = React.useState({
     email: "",
     password: "",
   });
+  useEffect(() => {
+    if (user !== null || autenticado === true) {
+      props.history.push("/admin");
+    }
+  }, [user, autenticado, props.history]);
 
   const obtenerDatos = (e) => {
     setDatos({

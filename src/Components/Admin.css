@@ -6,8 +6,33 @@
   display: block;
   width: 50%;
   margin: 15px auto;
+  padding: 10px;
+}
+.editor {
+  width: 60%;
+  display: block;
+  margin: 0 auto;
+}
+@media only screen and (max-width: 767px) {
+  .admin__input {
+    width: 100%;
+  }
+
+  .editor {
+    width: 100%;
+  }
+}
+@media (min-width: 768px) and (max-width: 1200px) {
+  .admin__input {
+    width: 60%;
+  }
+  .editor {
+    width: 75%;
+  }
 }
 .admin__button {
   width: fit-content;
   padding: 10px;
+  background-color: #059;
+  color: white;
 }
